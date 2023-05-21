@@ -1,9 +1,28 @@
-local is_debug_mode = false
+local is_debug_mode = true
 
 local function dbg_log(msg)
     if is_debug_mode then
         log(msg)
     end
+end
+-- Attempts parse provided string as "aai-...-loader"
+-- Returns mid-part of name, if string matches, or nil if it doesn't
+-- "aai-loader" results in empty string
+local function loader_name(name)
+    if name == nil then
+        return nil
+    end
+    if name == "aai-loader" then
+        return ""
+    end
+    if string.sub(name, 1, 4) ~= "aai-" then
+        return nil
+    end
+    name = string.sub(name, 4)
+    if string.sub(name, string.len(name) - 6) ~= "-loader" then
+        return nil
+    end
+    return string.sub(name, 1, string.len(name) - 7)
 end
 
 local function apply_energy_source(loader)
@@ -39,11 +58,36 @@ local function apply_energy_source(loader)
 end
 
 for _, loader in pairs(data.raw["loader-1x1"]) do
-    local name = loader.name
+    local name = loader_name(loader.name)
     -- Affect only AAI loaders
-    if string.sub(name, 1, 4) == "aai-"
-        and string.sub(name, string.len(name) - 6) == "-loader"
-    then
+    if name ~= nil then
         apply_energy_source(loader)
+    end
+end
+
+local function recipe_matches(recipe)
+    if recipe == nil then
+        return false
+    end
+
+    if loader_name(recipe.result) ~= nil then
+        return true
+    end
+
+    if recipe.results then
+        for _, result in pairs(recipe.results) do
+            if loader_name(result.name) ~= nil then
+                return true
+            end
+        end
+    end
+
+    return recipe_matches(recipe.normal) or recipe_matches(recipe.expensive)
+end
+
+for _, recipe in pairs(data.raw["recipe"]) do
+    if recipe_matches(recipe) then
+        dbg_log("Found loader recipe!")
+        dbg_log(serpent.block(recipe))
     end
 end

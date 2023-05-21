@@ -99,6 +99,10 @@ local function adjust_recipe(recipe)
         end
     end
 
+    if recipe.energy_required ~= nil then
+        recipe.energy_required = recipe.energy_required / 5
+    end
+
     adjust_recipe(recipe.normal)
     adjust_recipe(recipe.expensive)
 end

@@ -1,8 +1,14 @@
 ﻿---------------------------------------------------------------------------------------------------
+Version: 0.1.1
+Date: 21.05.2023
+  Bugfixes:
+    - Changed energy source from "secondary-output" to "secondary-input", otherwise loaders weren't consuming power properly. 
+---------------------------------------------------------------------------------------------------
 Version: 0.1.0
 Date: 21.05.2023
   Info:
-    - Initial version. 
+    - Initial version.
+  Features:
     - Forces aai-loaders into expensive mode, to disable fluid fueling logic.
     - Makes all AAI loaders consume electricity using Factorio's native energy system.
     - Adjusts all AAI loader recipes to be 5 times cheaper.

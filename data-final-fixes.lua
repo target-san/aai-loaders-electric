@@ -51,7 +51,7 @@ local function apply_energy_source(loader)
     loader.energy_source = {
         type = "electric",
         buffer_capacity = tostring(buffer_cap) .. "J",
-        usage_priority = "secondary-output",
+        usage_priority = "secondary-input",
         drain = "2KW",
     }
     loader.energy_per_item = tostring(item_cost) .. "J"

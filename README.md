@@ -1,9 +1,9 @@
-﻿= AAI Loaders: Electric power
+﻿# AAI Loaders: Electric power
 
 Makes all loaders created by [Earendel's AAI Loaders](https://mods.factorio.com/mod/aai-loaders) mod
 powered via electricity rather than being free or requiring lubricant
 
-== Details
+## Details
 
 - AAI Loaders mod is forced into "expensive" unlubricated mode,
     to make sure its lubricant supply scripting won't even try to run.
@@ -15,18 +15,18 @@ powered via electricity rather than being free or requiring lubricant
 - Base cost of each item transported is 6kJ, yet it lowers slightly with each speed
     tier above 15 items/s. As a result, normal loader is 92kW, fast is ~160kW and express is 218kW.
 
-== Known shortcomings
+## Known shortcomings
 
 - Loaders description says they have no cost. This is because localization wasn't touched at all
 - Recipe adjustment logic is very primitive, so may not always play as desired
 
-== Plans
+## Plans
 
 - Make lubricated mode work again, via Factorio's native power system
 - Balancing
 - Introduce recipes and localization overrides
 
-== Special thanks
+## Special thanks
 
 - Wube, for the awesome game
 - Earendel, for awesome standalone loaders mod

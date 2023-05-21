@@ -1,0 +1,12 @@
+{
+    "name": "aai-loaders-electric",
+    "version": "0.0.1",
+    "title": "AAI Loaders: Electric powered",
+    "author": "Target-san",
+    "dependencies": [
+        "base >= 1.1.80",
+        "aai-loaders >= 0.1.4"
+    ],
+    "description": "Tweak for AAI Loaders by Earendel. Enables use of Factorio's native energy system and makes loaders powered electrically",
+    "factorio_version": "1.1"
+}

@@ -76,7 +76,8 @@ local function recipe_matches(recipe)
 
     if recipe.results then
         for _, result in pairs(recipe.results) do
-            if loader_name(result.name) ~= nil then
+            if loader_name(result.name) ~= nil
+                or loader_name(result[1]) ~= nil then
                 return true
             end
         end
@@ -85,9 +86,29 @@ local function recipe_matches(recipe)
     return recipe_matches(recipe.normal) or recipe_matches(recipe.expensive)
 end
 
+local function adjust_recipe(recipe)
+    if recipe == nil then
+        return
+    end
+
+    for _, inp in pairs(recipe.ingredients) do
+        if inp.amount ~= nil then
+            inp.amount = math.ceil(inp.amount / 5)
+        elseif inp[2] ~= nil then
+            inp[2] = math.ceil(inp[2] / 5)
+        end
+    end
+
+    adjust_recipe(recipe.normal)
+    adjust_recipe(recipe.expensive)
+end
+
 for _, recipe in pairs(data.raw["recipe"]) do
     if recipe_matches(recipe) then
         dbg_log("Found loader recipe!")
+        dbg_log(serpent.block(recipe))
+        adjust_recipe(recipe)
+        dbg_log("Adjusted to:")
         dbg_log(serpent.block(recipe))
     end
 end

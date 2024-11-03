@@ -13,7 +13,7 @@ powered via electricity rather than being free or requiring lubricant
 - All loaders now use Factorio's native energy system via "energy_source" property.
     This makes them run at native speeds. No scripting.
 - Base cost of each item transported is 6kJ, yet it lowers slightly with each speed
-    tier above 15 items/s. As a result, normal loader is 92kW, fast is ~160kW and express is 218kW.
+    tier above 15 items/s. As a result, normal loader is 92kW, fast is ~166kW and express is ~225kW.
 
 ## Known shortcomings
 

@@ -1,4 +1,7 @@
-local is_debug_mode = true
+local is_debug_mode = false
+
+local ips_per_level = 15
+local base_item_cost = 6000
 
 local function dbg_log(msg)
     if is_debug_mode then
@@ -31,16 +34,17 @@ local function apply_energy_source(loader)
     -- Items per second, according to docs
     local items_per_second = loader.speed * 480
     -- Speed level 1 is 15 items per second, higher tiers are multiples
-    local speed_level = items_per_second / 15
-    -- Tiers below base are expressed as negative ones, i.e. 7.5 ips is level 0.5, becomes -1
-    -- While levels above 1 are shifted, so that 15 ips becomes level 0, with no adjustments to power per item
+    local speed_level = items_per_second / ips_per_level
+    local speed_factor
+    -- Tiers above 1 are shifted, so that 15 ips becomes level 0, with no adjustments to power per item
+    -- Tiers below 1, like 7.5 IPS which should've been 0.5, are reduced to 0
     if speed_level < 1 then
-        speed_level = - (1 / speed_level)
+        speed_level = 0
     else
         speed_level = speed_level - 1
     end
 
-    local item_cost = 6000 - 600 * speed_level
+    local item_cost = base_item_cost / (1 + speed_level / 10)
     -- buffer for exactly 1 second. Do we need buffer for loader?
     local buffer_cap = items_per_second * item_cost + 2000
     dbg_log("IPS:   " .. items_per_second)

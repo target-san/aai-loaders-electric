@@ -1,4 +1,9 @@
 ﻿---------------------------------------------------------------------------------------------------
+Version: 0.1.2
+Date: 3.11.2024
+  Bugfixes:
+    - Joules-per-item are now reduced nonlinearly with belt speed increase, which prevents negative JPI for ultra-fast belts 
+---------------------------------------------------------------------------------------------------
 Version: 0.1.1
 Date: 21.05.2023
   Bugfixes:

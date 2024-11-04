@@ -19,12 +19,8 @@ powered via electricity rather than being free or requiring lubricant
 
 - Loaders description says they have no cost. This is because localization wasn't touched at all
 - Recipe adjustment logic is very primitive, so may not always play as desired
-
-## Plans
-
-- Make lubricated mode work again, via Factorio's native power system
-- Balancing
-- Introduce recipes and localization overrides
+- Power consumption graph looks like buzzsaw because loader consumes power not steadily every tick but when item is transferred
+- Max power consumption is shown incorrectly; yellow loader would show it as 722kW while it should've been 92kW. This is probably because consumption is computed like 2 items are transferred per tick, which results in 60 ticks * 2 lanes * power-per-item. The real median consumption is 92kW for yellow loader - 15IPS * 6kJPI + 2kW drain
 
 ## Special thanks
 
